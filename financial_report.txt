@@ -1,0 +1,5 @@
+Fundraising Event	Amount	Currency
+Charity One	52,64	EUR
+Charity Two	72,19	USD
+Charity Three	26,43	USD
+Charity Four	-	PLN

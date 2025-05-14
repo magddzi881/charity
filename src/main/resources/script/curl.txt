@@ -1,0 +1,21 @@
+-- Put money inside a box
+curl -X POST "http://localhost:8080/api/boxes/2/money" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"amount\":4.00}"
+curl -X POST "http://localhost:8080/api/boxes/1/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":11.20}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"amount\":24.50}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":4.20}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":9.10}"
+
+-- Transfer money to charity
+curl -X POST http://localhost:8080/api/boxes/1/transfer
+curl -X POST http://localhost:8080/api/boxes/2/transfer
+curl -X POST http://localhost:8080/api/boxes/3/transfer
+curl -X POST http://localhost:8080/api/boxes/4/transfer
+
+-- Assign box to charity
+curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
+
+-- Delete a box
+curl -X DELETE http://localhost:8080/api/boxes/2
+
+-- Generate report
+curl -X GET http://localhost:8080/api/report
