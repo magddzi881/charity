@@ -1,0 +1,151 @@
+# Charity Fundraising Application
+
+A backend application for managing collection boxes during fundraising events for charity organizations. It allows to register boxes and events, assign them to events, add money, transfer funds, and view financial reports.
+
+## Build and Run Instructions
+
+### Clone the Repository
+```bash
+git clone https://github.com/magddzi881/charity.git
+```
+
+### Build the Project
+```bash
+mvn clean install
+```
+
+### Run the Application
+```bash
+mvn spring-boot:run
+```
+
+The application will run at 🔗 [`http://localhost:8080`](http://localhost:8080)
+
+---
+
+## Accessing H2 Database Console
+
+To access the H2 database console, open the following URL after the application is running:
+
+🔗 [`http://localhost:8080/h2-console`](http://localhost:8080/h2-console)
+
+### Login Credentials
+
+- **JDBC URL**: `jdbc:h2:mem:charitydb`
+- **Username**: `sa`
+- **Password**: *(leave empty)*
+
+---
+
+## SQL Script for Data Insertion
+The script for inserting data is available in `resources/script/data.sql`, manually add samples using the H2 console.
+```sql
+-- Create fundraising events
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Two', 'USD');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Three', 'USD');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Four', 'PLN');
+
+-- Create collection boxes
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+
+-- Assign few boxes to events
+UPDATE collection_box SET assigned = TRUE, event_id = 1 WHERE id = 1;
+UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 2;
+UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 3;
+UPDATE collection_box SET assigned = TRUE, event_id = 3 WHERE id = 4;
+
+-- Add money to collection boxes
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (1, 'EUR', 50.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'USD', 20.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'EUR', 10.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (3, 'USD', 5.50);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (4, 'PLN', 100.00);
+
+-- View all tables
+SELECT * FROM FUNDRAISING_EVENT;
+SELECT * FROM COLLECTION_BOX ;
+SELECT * FROM COLLECTION_BOX_MONEY;
+```
+---
+
+## CURL Sample Queries
+Sample queries are included in `resources/script/curl.txt`. Examples:
+
+- **Add money (PLN)**:
+    ```bash
+    curl -X POST "http://localhost:8080/api/boxes/1/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":11.20}"
+    ```
+
+- **Transfer from Box 1**:
+    ```bash
+    curl -X POST http://localhost:8080/api/boxes/1/transfer
+    ```
+
+- **Assign Box**:
+    ```bash
+    curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
+    ```
+
+- **Delete a Box**:
+    ```bash
+    curl -X DELETE http://localhost:8080/api/boxes/2
+    ```
+
+- **Generate Report**:
+    ```bash
+    curl -X GET http://localhost:8080/api/report
+    ```
+
+---
+
+
+## Tests
+
+Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`.
+- **Run Tests**:
+    ```bash
+    mvn test
+    ```
+
+
+### REST API Endpoints Covered in Tests
+
+#### **Create Fundraising Event**
+- **Method**: `POST`
+- **Endpoint**: `/api/events`
+
+#### **Register Collection Box**
+- **Method**: `POST`
+- **Endpoint**: `/api/boxes`
+
+#### **List Collection Boxes**
+- **Method**: `GET`
+- **Endpoint**: `/api/boxes`
+
+#### **Unregister Collection Box**
+- **Method**: `DELETE`
+- **Endpoint**: `/api/boxes/{id}`
+
+####  **Assign Collection Box to Event**
+- **Method**: `POST`
+- **Endpoint**: `/api/boxes/{boxId}/assign/{eventId}`
+
+#### **Put Money in Box**
+- **Method**: `POST`
+- **Endpoint**: `/api/boxes/{id}/money`
+
+#### **Transfer Money to Event**
+- **Method**: `POST`
+- **Endpoint**: `/api/boxes/{id}/transfer`
+
+#### **Financial Report**
+- **Method**: `GET`
+- **Endpoint**: `/api/report`
+- **Generates also two files**: `financial_report.pdf` and `financial_report.txt`
+
+---
