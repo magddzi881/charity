@@ -38,7 +38,7 @@ To access the H2 database console, open the following URL after the application 
 ---
 
 ## SQL Script for Data Insertion
-The script for inserting data is available in `resources/script/data.sql`, manually add samples using the H2 console.
+The script for inserting data is available in `src/main/resources/data.sql`. When the application starts, it will automatically execute SQL to add sample data from the script:
 ```sql
 -- Create fundraising events
 INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
