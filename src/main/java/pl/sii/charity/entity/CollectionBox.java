@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
+@Table(name = "collection_box")
 public class CollectionBox {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "assigned", nullable = false)
     private boolean assigned;
 
     @ManyToOne
@@ -18,7 +20,7 @@ public class CollectionBox {
     private FundraisingEvent fundraisingEvent;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "collection_box_money")
+    @CollectionTable(name = "collection_box_money", joinColumns = @JoinColumn(name = "collection_box_id"))
     @MapKeyColumn(name = "currency")
     @MapKeyEnumerated(EnumType.STRING)
     @Column(name = "amount")

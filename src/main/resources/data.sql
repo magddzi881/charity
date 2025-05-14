@@ -15,6 +15,7 @@ CREATE TABLE collection_box_money (
     currency VARCHAR(3),
     amount DECIMAL(10, 2)
 );
+
 -- Create fundraising events
 INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
 INSERT INTO fundraising_event (name, currency) VALUES ('Charity Two', 'USD');
@@ -40,3 +41,8 @@ INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2
 INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'EUR', 10.00);
 INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (3, 'USD', 5.50);
 INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (4, 'PLN', 100.00);
+
+-- View all tables
+SELECT * FROM FUNDRAISING_EVENT;
+SELECT * FROM COLLECTION_BOX ;
+SELECT * FROM COLLECTION_BOX_MONEY;

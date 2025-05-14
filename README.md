@@ -74,7 +74,7 @@ SELECT * FROM COLLECTION_BOX_MONEY;
 ---
 
 ## CURL Sample Queries
-Sample queries are included in `resources/script/curl.txt`. Examples:
+Sample queries are included in `resources/curl.txt`. Examples:
 
 - **Add money (PLN)**:
     ```bash

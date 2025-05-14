@@ -94,7 +94,7 @@ public class CollectionControllerTest {
 
     @Test
     public void testAssignBoxToEvent() throws Exception {
-        mockMvc.perform(post("/api/boxes/4/assign/1"))
+        mockMvc.perform(post("/api/boxes/6/assign/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Box assigned to fundraising event successfully."));
     }
