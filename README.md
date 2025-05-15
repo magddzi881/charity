@@ -64,7 +64,7 @@ mvn test
 ---
 
 ## CURL Sample Queries
-Sample queries are included in `resources/curl.txt` 
+Sample queries are included in `src/main/resources/curl.txt` 
 
 ``` bash
 # -- Create a new fundraising event
