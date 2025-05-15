@@ -1,0 +1,160 @@
+{
+  "info": {
+    "_postman_id": "12345678-abcd-ef01-2345-6789abcdef01",
+    "name": "Charity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Fundraising Event - Charity Five",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"currency\":\"USD\",\"name\":\"Charity Five\"}"
+        },
+        "url": { "raw": "http://localhost:8080/api/events", "host": ["http://localhost:8080"], "path": ["api", "events"] }
+      }
+    },
+    {
+      "name": "Create Fundraising Event - Charity Six",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"currency\":\"EUR\",\"name\":\"Charity Six\"}"
+        },
+        "url": { "raw": "http://localhost:8080/api/events", "host": ["http://localhost:8080"], "path": ["api", "events"] }
+      }
+    },
+    {
+      "name": "Create Fundraising Event - Charity Seven",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"currency\":\"USD\",\"name\":\"Charity Seven\"}"
+        },
+        "url": { "raw": "http://localhost:8080/api/events", "host": ["http://localhost:8080"], "path": ["api", "events"] }
+      }
+    },
+    {
+      "name": "Register New Collection Box",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes", "host": ["http://localhost:8080"], "path": ["api", "boxes"] }
+      }
+    },
+    {
+      "name": "List All Collection Boxes",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/api/boxes", "host": ["http://localhost:8080"], "path": ["api", "boxes"] }
+      }
+    },
+    {
+      "name": "Add Money to Box 2 (EUR)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"currency\":\"EUR\",\"amount\":4.00}" },
+        "url": { "raw": "http://localhost:8080/api/boxes/2/money", "host": ["http://localhost:8080"], "path": ["api", "boxes", "2", "money"] }
+      }
+    },
+    {
+      "name": "Add Money to Box 1 (PLN)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"currency\":\"PLN\",\"amount\":11.20}" },
+        "url": { "raw": "http://localhost:8080/api/boxes/1/money", "host": ["http://localhost:8080"], "path": ["api", "boxes", "1", "money"] }
+      }
+    },
+    {
+      "name": "Add Money to Box 3 (EUR)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"currency\":\"EUR\",\"amount\":24.50}" },
+        "url": { "raw": "http://localhost:8080/api/boxes/3/money", "host": ["http://localhost:8080"], "path": ["api", "boxes", "3", "money"] }
+      }
+    },
+    {
+      "name": "Add Money to Box 3 (PLN - 4.20)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"currency\":\"PLN\",\"amount\":4.20}" },
+        "url": { "raw": "http://localhost:8080/api/boxes/3/money", "host": ["http://localhost:8080"], "path": ["api", "boxes", "3", "money"] }
+      }
+    },
+    {
+      "name": "Add Money to Box 3 (PLN - 9.10)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\"currency\":\"PLN\",\"amount\":9.10}" },
+        "url": { "raw": "http://localhost:8080/api/boxes/3/money", "host": ["http://localhost:8080"], "path": ["api", "boxes", "3", "money"] }
+      }
+    },
+    {
+      "name": "Transfer from Box 1",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/1/transfer", "host": ["http://localhost:8080"], "path": ["api", "boxes", "1", "transfer"] }
+      }
+    },
+    {
+      "name": "Transfer from Box 2",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/2/transfer", "host": ["http://localhost:8080"], "path": ["api", "boxes", "2", "transfer"] }
+      }
+    },
+    {
+      "name": "Transfer from Box 3",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/3/transfer", "host": ["http://localhost:8080"], "path": ["api", "boxes", "3", "transfer"] }
+      }
+    },
+    {
+      "name": "Transfer from Box 4",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/4/transfer", "host": ["http://localhost:8080"], "path": ["api", "boxes", "4", "transfer"] }
+      }
+    },
+    {
+      "name": "Assign Box 5 to Event 4",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/5/assign/4", "host": ["http://localhost:8080"], "path": ["api", "boxes", "5", "assign", "4"] }
+      }
+    },
+    {
+      "name": "Delete Box 2",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "http://localhost:8080/api/boxes/2", "host": ["http://localhost:8080"], "path": ["api", "boxes", "2"] }
+      }
+    },
+    {
+      "name": "Unregister Box 3",
+      "request": {
+        "method": "POST",
+        "url": { "raw": "http://localhost:8080/api/boxes/3/unregister", "host": ["http://localhost:8080"], "path": ["api", "boxes", "3", "unregister"] }
+      }
+    },
+    {
+      "name": "Generate Financial Report",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/api/report", "host": ["http://localhost:8080"], "path": ["api", "report"] }
+      }
+    }
+  ]
+}

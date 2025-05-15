@@ -39,9 +39,9 @@ To access the H2 database console, open the following URL after the application 
 
 ## Tests
 
-Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
+Controller tests are available in the `CollectionControllerTest` file in `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
 
-#### Run tests:
+#### Run Tests:
 ```bash
 mvn test
 ```
@@ -51,20 +51,23 @@ mvn test
 
 | Endpoint                              | Method   | Description                                                     |
 | ------------------------------------- | -------- | --------------------------------------------------------------- |
+| `/api/boxes`                          | `GET`    | List all collection boxes (shows if assigned and if empty)      |
+| `/api/report`                         | `GET`    | Generate a financial report (creates `.pdf` and `.txt` files)   |
 | `/api/events`                         | `POST`   | Create a new fundraising event                                  |
 | `/api/boxes`                          | `POST`   | Register a new collection box                                   |
-| `/api/boxes`                          | `GET`    | List all collection boxes (shows if assigned and if empty)      |
-| `/api/boxes/{boxId}`                  | `DELETE` | Remove (delete) a collection box                                |
 | `/api/boxes/{boxId}/unregister`       | `POST`   | Unregister a collection box (clears money without transferring) |
 | `/api/boxes/{boxId}/assign/{eventId}` | `POST`   | Assign a collection box to a fundraising event                  |
 | `/api/boxes/{boxId}/money`            | `POST`   | Add money to a collection box                                   |
 | `/api/boxes/{boxId}/transfer`         | `POST`   | Transfer money from box to fundraising event account            |
-| `/api/report`                         | `GET`    | Generate a financial report (creates `.pdf` and `.txt` files)   |
+| `/api/boxes/{boxId}`                  | `DELETE` | Remove (delete) a collection box                                |
 
 ---
 
-## CURL Sample Queries
-Sample queries are included in `src/main/resources/curl.txt` 
+## Sample Queries
+
+- Postman collection (for import) in `src/main/resources/charity-data.json`
+- Sample `curl` requests in `src/main/resources/curl.txt` and:
+
 
 ``` bash
 # -- Create a new fundraising event
