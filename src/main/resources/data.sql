@@ -1,19 +1,24 @@
+-- Schema
 CREATE TABLE fundraising_event (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    currency VARCHAR(3)
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    amount DECIMAL(19, 4) DEFAULT 0
 );
 
 CREATE TABLE collection_box (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    assigned BOOLEAN,
-    event_id INT
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    assigned BOOLEAN NOT NULL,
+    event_id BIGINT,
+    CONSTRAINT fk_collection_box_event FOREIGN KEY (event_id) REFERENCES fundraising_event(id)
 );
 
 CREATE TABLE collection_box_money (
-    collection_box_id INT,
-    currency VARCHAR(3),
-    amount DECIMAL(10, 2)
+    collection_box_id BIGINT NOT NULL,
+    currency VARCHAR(50) NOT NULL,
+    amount DECIMAL(19, 4),
+    PRIMARY KEY (collection_box_id, currency),
+    CONSTRAINT fk_collection_box_money_collection_box FOREIGN KEY (collection_box_id) REFERENCES collection_box(id)
 );
 
 -- Create fundraising events

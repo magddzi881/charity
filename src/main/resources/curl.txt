@@ -1,3 +1,14 @@
+# -- Create a new fundraising event
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Five\"}"
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"name\":\"Charity Six\"}"
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Seven\"}"
+
+# -- Register a new empty collection box
+curl -X POST "http://localhost:8080/api/boxes"
+
+# -- List all collection boxes
+curl -X GET "http://localhost:8080/api/boxes"
+
 -- Put money inside a box
 curl -X POST "http://localhost:8080/api/boxes/2/money" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"amount\":4.00}"
 curl -X POST "http://localhost:8080/api/boxes/1/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":11.20}"

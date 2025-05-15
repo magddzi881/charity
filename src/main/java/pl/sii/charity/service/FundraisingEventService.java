@@ -14,6 +14,7 @@ import pl.sii.charity.error.EventNotFoundException;
 import pl.sii.charity.repository.FundraisingEventRepository;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -72,11 +73,17 @@ public class FundraisingEventService {
         File file = new File(fileName);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
-            writer.write("Fundraising Event\tAmount\tCurrency\n");
+            writer.write(String.format("%-20s\t%-10s\t%-8s%n", "Fundraising Event", "Amount", "Currency"));
 
             for (FinancialReportDTO entry : report) {
-                String amount = (entry.getAmount() == null) ? "-" : String.format("%.2f", entry.getAmount());
-                writer.write(String.format("%s\t%s\t%s\n", entry.getEventName(), amount, entry.getCurrency()));
+                String amount = (entry.getAmount().compareTo(BigDecimal.ZERO) == 0
+                        ? "-"
+                        : String.format("%.2f", entry.getAmount()));
+
+                writer.write(String.format("%-20s\t%-10s\t%-8s%n",
+                        entry.getEventName(),
+                        amount,
+                        entry.getCurrency()));
             }
 
             System.out.println("Financial report saved to " + fileName);
@@ -114,7 +121,9 @@ public class FundraisingEventService {
 
             for (FinancialReportDTO entry : report) {
                 table.addCell(new PdfPCell(new Phrase(entry.getEventName(), cellFont)));
-                String amount = (entry.getAmount() == null) ? "" : String.format("%.2f", entry.getAmount());
+                String amount = (entry.getAmount().compareTo(BigDecimal.ZERO) == 0
+                        ? ""
+                        : String.format("%.2f", entry.getAmount()));
                 table.addCell(new PdfPCell(new Phrase(amount, cellFont)));
                 table.addCell(new PdfPCell(new Phrase(entry.getCurrency().name(), cellFont)));
             }
