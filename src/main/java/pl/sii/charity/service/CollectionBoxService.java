@@ -80,14 +80,12 @@ public class CollectionBoxService {
      */
     public void unregisterBox(Long boxId) {
         CollectionBox box = getBox(boxId);
-        if (!box.getMoney().isEmpty() && box.getMoney().values().stream().anyMatch(amount -> amount.compareTo(BigDecimal.ZERO) > 0)) {
-            throw new RuntimeException("Cannot unregister a box that contains money.");
-        }
         if (!box.isAssigned()) {
             throw new RuntimeException("Box is already unregistered.");
         }
         box.setAssigned(false);
         box.setFundraisingEvent(null);
+        box.setMoney(null);
         repository.save(box);
     }
 

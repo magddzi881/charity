@@ -95,10 +95,12 @@ public class CollectionControllerTest {
     }
 
     @Test
-    public void testUnregisterBoxWithMoneyFail() throws Exception {
+    public void testUnregisterBoxWithMoneyFailed() throws Exception {
+        mockMvc.perform(post("/api/boxes/4/unregister"));
+
         mockMvc.perform(post("/api/boxes/4/unregister"))
                 .andExpect(status().is(400))
-                .andExpect(content().string("Cannot unregister a box that contains money."));
+                .andExpect(content().string("Box is already unregistered."));
     }
 
     @Test
@@ -125,7 +127,7 @@ public class CollectionControllerTest {
     }
 
     @Test
-    public void testAssignBoxToEventFailed2() throws Exception {
+    public void testAssignBoxToEventNotFound() throws Exception {
         mockMvc.perform(post("/api/boxes/7/assign/0"))
                 .andExpect(status().is(400))
                 .andExpect(content().string("Event with ID 0 not found."));
