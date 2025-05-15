@@ -121,48 +121,24 @@ curl -X GET "http://localhost:8080/api/report"
 
 Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
 
-#### Run Tests:
+#### Run tests:
 ```bash
 mvn test
 ```
 
 ### REST API Endpoints Covered in Tests
 
-#### **Create Fundraising Event**
-- **Method**: `POST`
-- **Endpoint**: `/api/events`
 
-#### **Register Collection Box**
-- **Method**: `POST`
-- **Endpoint**: `/api/boxes`
-
-#### **List Collection Boxes**
-- **Method**: `GET`
-- **Endpoint**: `/api/boxes`
-
-#### **Remove Collection Box**
-- **Method**: `DELETE`
-- **Endpoint**: `/api/boxes/{boxId}`
-
-#### **Unregister Collection Box**
-- **Method**: `POST`
-- **Endpoint**: `"/boxes/{boxId}/unregister"`
-
-####  **Assign Collection Box to Event**
-- **Method**: `POST`
-- **Endpoint**: `/api/boxes/{boxId}/assign/{eventId}`
-
-#### **Put Money in Box**
-- **Method**: `POST`
-- **Endpoint**: `/api/boxes/{boxId}/money`
-
-#### **Transfer Money to Event**
-- **Method**: `POST`
-- **Endpoint**: `/api/boxes/{boxId}/transfer`
-
-#### **Financial Report**
-- **Method**: `GET`
-- **Endpoint**: `/api/report`
-- **Generates also two files**: `financial_report.pdf` and `financial_report.txt`
+| Endpoint                              | Method   | Description                                                     |
+| ------------------------------------- | -------- | --------------------------------------------------------------- |
+| `/api/events`                         | `POST`   | Create a new fundraising event                                  |
+| `/api/boxes`                          | `POST`   | Register a new collection box                                   |
+| `/api/boxes`                          | `GET`    | List all collection boxes (shows if assigned and if empty)      |
+| `/api/boxes/{boxId}`                  | `DELETE` | Remove (delete) a collection box                                |
+| `/api/boxes/{boxId}/unregister`       | `POST`   | Unregister a collection box (clears money without transferring) |
+| `/api/boxes/{boxId}/assign/{eventId}` | `POST`   | Assign a collection box to a fundraising event                  |
+| `/api/boxes/{boxId}/money`            | `POST`   | Add money to a collection box                                   |
+| `/api/boxes/{boxId}/transfer`         | `POST`   | Transfer money from box to fundraising event account            |
+| `/api/report`                         | `GET`    | Generate a financial report (creates `.pdf` and `.txt` files)   |
 
 ---
