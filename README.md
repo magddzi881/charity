@@ -38,7 +38,7 @@ To access the H2 database console, open the following URL after the application 
 ---
 
 ## SQL Script for Data Insertion
-The script for inserting data is available in `src/main/resources/data.sql`. When the application starts, it will automatically execute SQL to add sample data from the script:
+The script for inserting data is available in `src/main/resources/data.sql` When the application starts, it will automatically execute SQL to add sample data from the script:
 ```sql
 -- Create fundraising events
 INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
@@ -74,44 +74,54 @@ SELECT * FROM COLLECTION_BOX_MONEY;
 ---
 
 ## CURL Sample Queries
-Sample queries are included in `resources/curl.txt`. Examples:
+Sample queries are included in `resources/curl.txt`. 
 
-- **Add money (PLN)**:
-    ```bash
-    curl -X POST "http://localhost:8080/api/boxes/1/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":11.20}"
-    ```
+``` bash
+# -- Create a new fundraising event
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Five\"}"
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"name\":\"Charity Six\"}"
+curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Seven\"}"
 
-- **Transfer from Box 1**:
-    ```bash
-    curl -X POST http://localhost:8080/api/boxes/1/transfer
-    ```
+# -- Register a new empty collection box
+curl -X POST "http://localhost:8080/api/boxes"
 
-- **Assign Box**:
-    ```bash
-    curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
-    ```
+# -- List all collection boxes
+curl -X GET "http://localhost:8080/api/boxes"
 
-- **Delete a Box**:
-    ```bash
-    curl -X DELETE http://localhost:8080/api/boxes/2
-    ```
+# -- Put money inside a box
+curl -X POST "http://localhost:8080/api/boxes/2/money" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"amount\":4.00}"
+curl -X POST "http://localhost:8080/api/boxes/1/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":11.20}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"amount\":24.50}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":4.20}"
+curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":9.10}"
 
-- **Generate Report**:
-    ```bash
-    curl -X GET http://localhost:8080/api/report
-    ```
+# -- Transfer money to charity
+curl -X POST "http://localhost:8080/api/boxes/1/transfer"
+curl -X POST "http://localhost:8080/api/boxes/2/transfer"
+curl -X POST "http://localhost:8080/api/boxes/3/transfer"
+curl -X POST "http://localhost:8080/api/boxes/4/transfer"
+
+# -- Assign box to charity
+curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
+
+# -- Delete a box
+curl -X DELETE "http://localhost:8080/api/boxes/2"
+
+# -- Generate report
+curl -X GET "http://localhost:8080/api/report"
+
+```
 
 ---
 
-
 ## Tests
 
-Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`.
-- **Run Tests**:
-    ```bash
-    mvn test
-    ```
+Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
 
+#### Run Tests:
+```bash
+mvn test
+```
 
 ### REST API Endpoints Covered in Tests
 

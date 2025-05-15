@@ -1,12 +1,12 @@
-# -- Create a new fundraising event
+-- Create a new fundraising event
 curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Five\"}"
 curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"EUR\",\"name\":\"Charity Six\"}"
 curl -X POST "http://localhost:8080/api/events" -H "Content-Type: application/json" -d "{\"currency\":\"USD\",\"name\":\"Charity Seven\"}"
 
-# -- Register a new empty collection box
+-- Register a new empty collection box
 curl -X POST "http://localhost:8080/api/boxes"
 
-# -- List all collection boxes
+-- List all collection boxes
 curl -X GET "http://localhost:8080/api/boxes"
 
 -- Put money inside a box
@@ -17,16 +17,16 @@ curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: applica
 curl -X POST "http://localhost:8080/api/boxes/3/money" -H "Content-Type: application/json" -d "{\"currency\":\"PLN\",\"amount\":9.10}"
 
 -- Transfer money to charity
-curl -X POST http://localhost:8080/api/boxes/1/transfer
-curl -X POST http://localhost:8080/api/boxes/2/transfer
-curl -X POST http://localhost:8080/api/boxes/3/transfer
-curl -X POST http://localhost:8080/api/boxes/4/transfer
+curl -X POST "http://localhost:8080/api/boxes/1/transfer"
+curl -X POST "http://localhost:8080/api/boxes/2/transfer"
+curl -X POST "http://localhost:8080/api/boxes/3/transfer"
+curl -X POST "http://localhost:8080/api/boxes/4/transfer"
 
 -- Assign box to charity
 curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
 
 -- Delete a box
-curl -X DELETE http://localhost:8080/api/boxes/2
+curl -X DELETE "http://localhost:8080/api/boxes/2"
 
 -- Generate report
-curl -X GET http://localhost:8080/api/report
+curl -X GET "http://localhost:8080/api/report"
