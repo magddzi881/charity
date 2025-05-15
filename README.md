@@ -37,40 +37,30 @@ To access the H2 database console, open the following URL after the application 
 
 ---
 
-## SQL Script for Data Insertion
-The script for inserting data is available in `src/main/resources/data.sql` When the application starts, it will automatically execute SQL to add sample data from the script:
-```sql
--- Create fundraising events
-INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
-INSERT INTO fundraising_event (name, currency) VALUES ('Charity Two', 'USD');
-INSERT INTO fundraising_event (name, currency) VALUES ('Charity Three', 'USD');
-INSERT INTO fundraising_event (name, currency) VALUES ('Charity Four', 'PLN');
+## Tests
 
--- Create collection boxes
-INSERT INTO collection_box (assigned) VALUES (FALSE);
-INSERT INTO collection_box (assigned) VALUES (FALSE);
-INSERT INTO collection_box (assigned) VALUES (FALSE);
-INSERT INTO collection_box (assigned) VALUES (FALSE);
-INSERT INTO collection_box (assigned) VALUES (FALSE);
+Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
 
--- Assign few boxes to events
-UPDATE collection_box SET assigned = TRUE, event_id = 1 WHERE id = 1;
-UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 2;
-UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 3;
-UPDATE collection_box SET assigned = TRUE, event_id = 3 WHERE id = 4;
-
--- Add money to collection boxes
-INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (1, 'EUR', 50.00);
-INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'USD', 20.00);
-INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'EUR', 10.00);
-INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (3, 'USD', 5.50);
-INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (4, 'PLN', 100.00);
-
--- View all tables
-SELECT * FROM FUNDRAISING_EVENT;
-SELECT * FROM COLLECTION_BOX ;
-SELECT * FROM COLLECTION_BOX_MONEY;
+#### Run tests:
+```bash
+mvn test
 ```
+
+### REST API Endpoints Covered in Tests
+
+
+| Endpoint                              | Method   | Description                                                     |
+| ------------------------------------- | -------- | --------------------------------------------------------------- |
+| `/api/events`                         | `POST`   | Create a new fundraising event                                  |
+| `/api/boxes`                          | `POST`   | Register a new collection box                                   |
+| `/api/boxes`                          | `GET`    | List all collection boxes (shows if assigned and if empty)      |
+| `/api/boxes/{boxId}`                  | `DELETE` | Remove (delete) a collection box                                |
+| `/api/boxes/{boxId}/unregister`       | `POST`   | Unregister a collection box (clears money without transferring) |
+| `/api/boxes/{boxId}/assign/{eventId}` | `POST`   | Assign a collection box to a fundraising event                  |
+| `/api/boxes/{boxId}/money`            | `POST`   | Add money to a collection box                                   |
+| `/api/boxes/{boxId}/transfer`         | `POST`   | Transfer money from box to fundraising event account            |
+| `/api/report`                         | `GET`    | Generate a financial report (creates `.pdf` and `.txt` files)   |
+
 ---
 
 ## CURL Sample Queries
@@ -117,28 +107,38 @@ curl -X GET "http://localhost:8080/api/report"
 
 ---
 
-## Tests
+## SQL Script for Data Insertion
+The script for inserting data is available in `src/main/resources/data.sql` When the application starts, it will automatically execute SQL to add sample data from the script:
+```sql
+-- Create fundraising events
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity One', 'EUR');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Two', 'USD');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Three', 'USD');
+INSERT INTO fundraising_event (name, currency) VALUES ('Charity Four', 'PLN');
 
-Controller tests are available in the `src/test/java/pl/sii/charity/controller/CollectionControllerTest.java`
+-- Create collection boxes
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
+INSERT INTO collection_box (assigned) VALUES (FALSE);
 
-#### Run tests:
-```bash
-mvn test
+-- Assign few boxes to events
+UPDATE collection_box SET assigned = TRUE, event_id = 1 WHERE id = 1;
+UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 2;
+UPDATE collection_box SET assigned = TRUE, event_id = 2 WHERE id = 3;
+UPDATE collection_box SET assigned = TRUE, event_id = 3 WHERE id = 4;
+
+-- Add money to collection boxes
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (1, 'EUR', 50.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'USD', 20.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (2, 'EUR', 10.00);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (3, 'USD', 5.50);
+INSERT INTO collection_box_money (collection_box_id, currency, amount) VALUES (4, 'PLN', 100.00);
+
+-- View all tables
+SELECT * FROM FUNDRAISING_EVENT;
+SELECT * FROM COLLECTION_BOX ;
+SELECT * FROM COLLECTION_BOX_MONEY;
 ```
-
-### REST API Endpoints Covered in Tests
-
-
-| Endpoint                              | Method   | Description                                                     |
-| ------------------------------------- | -------- | --------------------------------------------------------------- |
-| `/api/events`                         | `POST`   | Create a new fundraising event                                  |
-| `/api/boxes`                          | `POST`   | Register a new collection box                                   |
-| `/api/boxes`                          | `GET`    | List all collection boxes (shows if assigned and if empty)      |
-| `/api/boxes/{boxId}`                  | `DELETE` | Remove (delete) a collection box                                |
-| `/api/boxes/{boxId}/unregister`       | `POST`   | Unregister a collection box (clears money without transferring) |
-| `/api/boxes/{boxId}/assign/{eventId}` | `POST`   | Assign a collection box to a fundraising event                  |
-| `/api/boxes/{boxId}/money`            | `POST`   | Add money to a collection box                                   |
-| `/api/boxes/{boxId}/transfer`         | `POST`   | Transfer money from box to fundraising event account            |
-| `/api/report`                         | `GET`    | Generate a financial report (creates `.pdf` and `.txt` files)   |
-
 ---
