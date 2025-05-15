@@ -107,6 +107,9 @@ curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
 # -- Delete a box
 curl -X DELETE "http://localhost:8080/api/boxes/2"
 
+# -- Unregister a box
+curl -X POST "http://localhost:8080/api/boxes/3/unregister"
+
 # -- Generate report
 curl -X GET "http://localhost:8080/api/report"
 
@@ -137,9 +140,13 @@ mvn test
 - **Method**: `GET`
 - **Endpoint**: `/api/boxes`
 
-#### **Unregister Collection Box**
+#### **Remove Collection Box**
 - **Method**: `DELETE`
-- **Endpoint**: `/api/boxes/{id}`
+- **Endpoint**: `/api/boxes/{boxId}`
+
+#### **Unregister Collection Box**
+- **Method**: `POST`
+- **Endpoint**: `"/boxes/{boxId}/unregister"`
 
 ####  **Assign Collection Box to Event**
 - **Method**: `POST`
@@ -147,11 +154,11 @@ mvn test
 
 #### **Put Money in Box**
 - **Method**: `POST`
-- **Endpoint**: `/api/boxes/{id}/money`
+- **Endpoint**: `/api/boxes/{boxId}/money`
 
 #### **Transfer Money to Event**
 - **Method**: `POST`
-- **Endpoint**: `/api/boxes/{id}/transfer`
+- **Endpoint**: `/api/boxes/{boxId}/transfer`
 
 #### **Financial Report**
 - **Method**: `GET`

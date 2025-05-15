@@ -65,13 +65,26 @@ public class CollectionController {
     }
 
     /**
-     * Removes (unregister) a collection box
+     * Removes a collection box
      */
     @DeleteMapping("/boxes/{boxId}")
     public ResponseEntity<String> removeBox(@PathVariable Long boxId) {
         try {
             boxService.removeBox(boxId);
             return ResponseEntity.ok("Collection box removed successfully.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    /**
+     * Unregisters a collection box
+     */
+    @PostMapping("/boxes/{boxId}/unregister")
+    public ResponseEntity<String> unregisterBox(@PathVariable Long boxId) {
+        try {
+            boxService.unregisterBox(boxId);
+            return ResponseEntity.ok("Collection box unregistered successfully.");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

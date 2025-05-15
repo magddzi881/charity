@@ -86,6 +86,22 @@ public class CollectionControllerTest {
     }
 
     @Test
+    public void testUnregisterBox() throws Exception {
+        mockMvc.perform(post("/api/boxes/7/assign/1"));
+
+        mockMvc.perform(post("/api/boxes/7/unregister"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Collection box unregistered successfully."));
+    }
+
+    @Test
+    public void testUnregisterBoxWithMoneyFail() throws Exception {
+        mockMvc.perform(post("/api/boxes/4/unregister"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("Cannot unregister a box that contains money."));
+    }
+
+    @Test
     public void testListBoxes() throws Exception {
         mockMvc.perform(get("/api/boxes"))
                 .andExpect(status().isOk())

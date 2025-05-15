@@ -28,5 +28,8 @@ curl -X POST "http://localhost:8080/api/boxes/5/assign/4"
 -- Delete a box
 curl -X DELETE "http://localhost:8080/api/boxes/2"
 
+-- Unregister a box
+curl -X POST "http://localhost:8080/api/boxes/3/unregister"
+
 -- Generate report
 curl -X GET "http://localhost:8080/api/report"
