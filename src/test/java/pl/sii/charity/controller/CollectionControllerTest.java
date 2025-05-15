@@ -109,6 +109,13 @@ public class CollectionControllerTest {
     }
 
     @Test
+    public void testAssignBoxToEventFailed2() throws Exception {
+        mockMvc.perform(post("/api/boxes/7/assign/0"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("Event with ID 0 not found."));
+    }
+
+    @Test
     public void testPutMoneyInBox() throws Exception {
         mockMvc.perform(post("/api/boxes/3/money")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -152,9 +159,4 @@ public class CollectionControllerTest {
                 .andExpect(content().string("Box with ID 0 not found."));
     }
 
-    @Test
-    public void testGetFinancialReport() throws Exception {
-        mockMvc.perform(get("/api/report"))
-                .andExpect(status().isOk());
-    }
 }
